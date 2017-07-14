@@ -1,0 +1,34 @@
+{
+	"name": "bashka/bricks_business_atol54_gateway",
+	"description": "Пакет для выполнения запросов согласно протоколу \"Атол Онлайн\"",
+	"type": "library",
+	"license": "MIT",
+	"authors": [
+	    {
+	        "name": "Artur Sh. Mamedbekov",
+	        "email": "Artur-Mamedbekov@yandex.ru"
+	    }
+	],
+	"require": {
+		"php": ">= 5.5.0 || ^7.0",
+		"psr/http-message": "^1.0",
+		"bashka/bricks_business_atol54": "^3.0.0"
+	},
+	"autoload": {
+	    "psr-4": {
+	  	 	"Bricks\\Business\\Atol54\\Gateway\\": "src/"
+	    }
+	},
+	"suggest": {
+		"guzzlehttp/guzzle": "Required for using GuzzleClient"
+	},
+	"require-dev": {
+		"phpunit/PHPUnit": "^6.0",
+		"guzzlehttp/guzzle": "^6.0"
+	},
+	"autoload-dev": {
+	    "psr-4": {
+	  	  	"Bricks\\Business\\Atol54\\Gateway\\UnitTest\\": "test/"
+	    }
+	}
+}
