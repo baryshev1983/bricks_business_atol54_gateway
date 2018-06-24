@@ -12,7 +12,8 @@
 	"require": {
 		"php": ">= 5.5.0 || ^7.0",
 		"psr/http-message": "^1.0",
-		"bashka/bricks_business_atol54": "^3.0.0"
+		"bashka/bricks_business_atol54": "^3.0.0",
+		"guzzlehttp/guzzle": "^6.0"
 	},
 	"autoload": {
 	    "psr-4": {
@@ -23,8 +24,7 @@
 		"guzzlehttp/guzzle": "Required for using GuzzleClient"
 	},
 	"require-dev": {
-		"phpunit/PHPUnit": "^6.0",
-		"guzzlehttp/guzzle": "^6.0"
+		"phpunit/PHPUnit": "^6.0"
 	},
 	"autoload-dev": {
 	    "psr-4": {
