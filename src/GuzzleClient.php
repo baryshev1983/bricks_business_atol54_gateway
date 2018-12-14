@@ -22,6 +22,7 @@ class GuzzleClient implements ClientInterface{
    * @var GuzzleClientInterface Guzzle-клиент.
    */
   private $guzzle;
+  const SERVER_URL = 'https://testonline.atol.ru/possystem/v4';
 
   /**
    * @return ClientInterface Дефолтный HTTP-клиент.
@@ -73,11 +74,10 @@ class GuzzleClient implements ClientInterface{
   protected function prepareRequestForOperation($groupCode, $token, $json, $method){
     return new Request(
       'POST',
-      sprintf('https://online.atol.ru/possystem/v3/%s/%s?', $groupCode, $method) . http_build_query([
-        'tokenid' => $token,
-      ]),
+      sprintf('%s/%s/%s?', self::SERVER_URL, $groupCode, $method),
       [
-        'Content-Type' => 'application/json',
+        'Content-Type' => 'application/json; charset=utf-8',
+        'Token' => $token,
         'Content-Length' => strlen($json),
       ],
       $json
@@ -89,8 +89,10 @@ class GuzzleClient implements ClientInterface{
    */
   public function getToken($login, $pass){
     $request = new Request(
-      'GET',
-      'https://online.atol.ru/possystem/v3/getToken?' . http_build_query([
+      'POST',
+      self::SERVER_URL . '/getToken?', [
+          'Content-Type' => 'application/json; charset=utf-8',
+      ], \GuzzleHttp\json_encode([
         'login' => $login,
         'pass' => $pass
       ])
@@ -141,10 +143,10 @@ class GuzzleClient implements ClientInterface{
   public function getReport($groupCode, $token, $uuid){
     $request = new Request(
       'GET',
-      sprintf('https://online.atol.ru/possystem/v3/%s/report/%s?', $groupCode, $uuid) . http_build_query([
-        'tokenid' => $token,
-      ])
-    );
+      sprintf(self::SERVER_URL . '/%s/report/%s?', $groupCode, $uuid), [
+            'Content-Type' => 'application/json; charset=utf-8',
+            'Token' => $token,
+      ]);
 
     return $this->send($request);
   }
