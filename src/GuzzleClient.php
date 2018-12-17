@@ -17,12 +17,14 @@ use Bricks\Business\Atol54\Gateway\Exception\RequestFailedException;
  *
  * @author Artur Sh. Mamedbekov
  */
-class GuzzleClient implements ClientInterface{
+class GuzzleClient implements ClientInterface
+{
+  const SERVER_URL = 'https://testonline.atol.ru/possystem/v4';
+
   /**
    * @var GuzzleClientInterface Guzzle-клиент.
    */
   private $guzzle;
-  const SERVER_URL = 'https://testonline.atol.ru/possystem/v4';
 
   /**
    * @return ClientInterface Дефолтный HTTP-клиент.
@@ -87,12 +89,15 @@ class GuzzleClient implements ClientInterface{
   /**
    * {@inheritdoc}
    */
-  public function getToken($login, $pass){
+  public function getToken($login, $pass)
+  {
     $request = new Request(
       'POST',
-      self::SERVER_URL . '/getToken?', [
+      self::SERVER_URL . '/getToken?',
+      [
           'Content-Type' => 'application/json; charset=utf-8',
-      ], \GuzzleHttp\json_encode([
+      ],
+      \GuzzleHttp\json_encode([
         'login' => $login,
         'pass' => $pass
       ])
@@ -140,14 +145,21 @@ class GuzzleClient implements ClientInterface{
   /**
    * {@inheritdoc}
    */
-  public function getReport($groupCode, $token, $uuid){
-    $request = new Request(
-      'GET',
-      sprintf(self::SERVER_URL . '/%s/report/%s?', $groupCode, $uuid), [
+  public function getReport($groupCode, $token, $uuid)
+  {
+      $request = new Request(
+        'GET',
+        sprintf(
+            self::SERVER_URL . '/%s/report/%s?',
+            $groupCode,
+            $uuid
+        ),
+        [
             'Content-Type' => 'application/json; charset=utf-8',
             'Token' => $token,
-      ]);
+        ]
+    );
 
     return $this->send($request);
-  }
+   }
 }
