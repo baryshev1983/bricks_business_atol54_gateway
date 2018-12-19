@@ -19,7 +19,7 @@ use Bricks\Business\Atol54\Gateway\Exception\RequestFailedException;
  */
 class GuzzleClient implements ClientInterface
 {
-  const SERVER_URL = 'https://testonline.atol.ru/possystem/v4';
+  const SERVER_URL = 'https://online.atol.ru/possystem/v4';
 
   /**
    * @var GuzzleClientInterface Guzzle-клиент.
